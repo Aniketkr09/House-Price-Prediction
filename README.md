@@ -24,6 +24,6 @@ To preprocess and prepare data for machine learning models.
 To develop a predictive model for estimating house prices.
 To evaluate the model's performance using appropriate regression metrics.
 To deploy the model as an interactive web application for end users.
-## Technologies Used - Python - pandas - Scikit-learn - Streamlit 
+## Technologies Used - Python - numpy - pandas - matplotlib - Scikit-learn - Streamlit 
 ## Features - Train ML model - Predict house prices - Interactive web interface 
 ## Run  python train.py  streamlit run app.py
