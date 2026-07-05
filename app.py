@@ -1,52 +1,47 @@
-import streamlit as st
-import pickle
-import numpy as np
+from flask import Flask, render_template, request
+import pandas as pd
+import joblib
 
-# Load model
-with open("house_model.pkl", "rb") as file:
-    model = pickle.load(file)
+app = Flask(__name__)
 
-# App title
-st.title("🏠 House Price Prediction")
+# ------------------------
+# Load Model
+# ------------------------
 
-st.write(
-    "Enter house details below to estimate the price."
-)
+model = joblib.load("model/house_price_model.pkl")
 
-# User inputs (No upper limit)
-area = st.number_input(
-    "Area (sq. ft.)",
-    min_value=500,
-    value=5000
-)
 
-bedrooms = st.number_input(
-    "Bedrooms",
-    min_value=1,
-    value=3
-)
+@app.route("/")
+def home():
+    return render_template("index.html")
 
-bathrooms = st.number_input(
-    "Bathrooms",
-    min_value=1,
-    value=2
-)
 
-parking = st.number_input(
-    "Parking Spaces",
-    min_value=0,
-    value=2
-)
+@app.route("/predict", methods=["POST"])
+def predict():
 
-# Prediction button
-if st.button("Predict Price"):
+    area = float(request.form["area_sqft"])
+    bedrooms = int(request.form["bedrooms"])
+    bathrooms = int(request.form["bathrooms"])
+    floor = int(request.form["floor"])
+    location = request.form["location"]
 
-    input_data = np.array(
-        [[area, bedrooms, bathrooms, parking]]
+    input_data = pd.DataFrame({
+        "area_sqft": [area],
+        "bedrooms": [bedrooms],
+        "bathrooms": [bathrooms],
+        "floor": [floor],
+        "location": [location]
+    })
+
+    prediction = model.predict(input_data)[0]
+
+    prediction = f"₹ {prediction:,.0f}"
+
+    return render_template(
+        "index.html",
+        prediction=prediction
     )
 
-    prediction = model.predict(input_data)
 
-    st.success(
-        f"🏠 Estimated House Price: ₹ {prediction[0]:,.0f}"
-    )
+if __name__ == "__main__":
+    app.run(debug=True)
