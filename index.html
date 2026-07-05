@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>House Price Prediction</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="card">
+
+            <h1>🏠 House Price Prediction</h1>
+
+            <form action="/predict" method="POST">
+
+                <input type="number" name="area_sqft" placeholder="Area (sq.ft)" required>
+
+                <input type="number" name="bedrooms" placeholder="Bedrooms" required>
+
+                <input type="number" name="bathrooms" placeholder="Bathrooms" required>
+
+                <input type="number" name="floor" placeholder="Floor" required>
+
+                <select name="location">
+
+                    <option>Delhi</option>
+
+                    <option>Mumbai</option>
+
+                    <option>Bengaluru</option>
+
+                    <option>Hyderabad</option>
+
+                    <option>Chennai</option>
+
+                    <option>Pune</option>
+
+                    <option>Kolkata</option>
+
+                </select>
+
+                <button>
+
+                    Predict Price
+
+                </button>
+
+            </form>
+
+            {% if prediction %}
+
+            <div class="result">
+
+                <h2>{{ prediction }}</h2>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
