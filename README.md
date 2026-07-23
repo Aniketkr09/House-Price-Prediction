@@ -112,7 +112,7 @@ House-Price-Prediction/
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/House-Price-Prediction.git
+git clone https://github.com/Aniketkr09/House-Price-Prediction.git
 ```
 
 ### Navigate to the Project Directory
