@@ -22,5 +22,5 @@ To evaluate the model's performance using appropriate regression metrics.
 To deploy the model as an interactive web application for end users.
 ## Technologies Used - Python - numpy - pandas - matplotlib - Scikit-learn - Streamlit 
 ## Features - Train ML model - Predict house prices - Interactive web interface
-## Run  python train.py  streamlit run app.py
+## Run  python train.py ,python app.py
 ## house_model.pkl is the trained machine learning model file saved using Python's pickle module.
